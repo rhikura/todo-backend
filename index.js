@@ -2,7 +2,8 @@ import express from "express"
 import bodyParser from "body-parser"
 import pino from 'pino'
 import cors from 'cors'
-import todoRouter from "./routes/todo.js"
+import todosRouter from "./routes/todos.js"
+import postsRouter from "./routes/posts.js"
 
 const app = express()
 const logger = pino()
@@ -19,7 +20,8 @@ app.use(cors({
 }));
 app.use(loggerMiddleware)
 
-app.use('/todos', todoRouter)
+app.use('/todos', todosRouter)
+app.use('/posts', postsRouter)
 
 app.listen(5000, () => {
     logger.info("Server started on port 5000")
