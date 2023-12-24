@@ -4,6 +4,7 @@ import pino from 'pino'
 import cors from 'cors'
 import todosRouter from "./routes/todos.js"
 import postsRouter from "./routes/posts.js"
+import { resolve } from 'path'
 
 const app = express()
 const logger = pino()
@@ -29,6 +30,11 @@ app.get('/health', (req, res) => {
     res.status(200).send()
 })
 
+app.get('/', (req, res) => {
+    const staticHtmlFile = resolve('./src/index.html')
+    res.sendFile(staticHtmlFile)
+})
+
 app.listen(port, () => {
-    logger.info("Server started on port 5000")
+    logger.info(`Server started on port ${port}`)
 })
